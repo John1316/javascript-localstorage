@@ -22,21 +22,24 @@ if (localStorage.getItem("productsContainer") == null) {
 	}
 
 
-searchInp.onkeyup = function() {
-	searchProduct(searchInp.value);
+function searchProducts(search) {
+	var searchConatiner = '';
+	for (var i = 0; i < productsContainer.length; i++) {
+		if (productsContainer[i].name.toLowerCase().includes(search.toLowerCase())) {
+			searchConatiner +=
+				'<div class="col-md-3 mb-4"><img src="images/team-bw-2.jpg" class="img-fluid"><h2>' +
+				productsContainer[i].name +
+				'</h2><p class="text-danger">' +
+				productsContainer[i].price +
+				"</p><h3>" +
+				productsContainer[i].company +
+				'</h3><h3 class="text-info">' +
+				productsContainer[i].desc +
+				'</h3><button class="btn btn-danger" onclick="deleteProduct(' + i + ')">DELETE</button><button class="btn btn-info ml-2" onclick="setForm('+ i +')">update</button></div>';
+		}
+	}
+	document.getElementById("rowData").innerHTML = searchConatiner;
 }
-function searchProduct(term){
-	var searchCols = "";
-	for(var i = 0 ; i < productsContainer.length ; i++){
-if(productsContainer[i].name.includes(term)){
-searchCols += '<div class="col-md-3"><img src="images/team-bw-2.jpg" class="img-fluid"><h2>'+productsContainer[i].name+'</h2><p class="text-danger">'+productsContainer[i].price+'</p><h3>'+productsContainer[i].company+'</h3><h3 class="text-info">'+productsContainer[i].desc+'</h3><button class="btn btn-danger" onclick="deleteProduct('+i+')">DELETE</button></div>'
-}
-}
-	
-	searchRow.innerHTML = searchCols;
-}
-
-
 
 
 function setForm(i){
@@ -59,18 +62,13 @@ localStorage.setItem("productsContainer",JSON.stringify(productsContainer));
 
 }
 
-
-
-
-
-
 function validateForm()
 {
 	var errors = "";
-	var nameRegex = /^[A-Z][A-Za-z]{2,8}$/;
+	var nameRegex = /^[A-Z][A-Za-z1-9]{2,8}$/;
 	if(nameRegex.test(productNameInp.value) == false)
 		{
-			errors +="<p>productName must start with upperCase</p>";
+			errors +="<p>Product Name must start with upperCase</p>";
 			alertContainer.style.display = "block";
 			alertContainer.innerHTML = errors;
 		}
@@ -84,30 +82,25 @@ function validateForm()
 	}
 }
 
-addBtn.onclick = function()
-{
 
-{
-		if(addBtn.innerHTML == "add product"){
-			addProduct();
-			displayData();
-			clearForm();
-		} 
+addBtn.onclick = function(){
+	if(addBtn.innerHTML == "add product"){
+		addProduct();
+		displayData();
+		clearForm();
+	} 
 	else {
 		updateProduct();
 		displayData();
 		clearForm();
-		
 	}
-}
-  
 }
 
 
 function addProduct()
 {
 
-
+	
 	var product = 
 	{
 		name:productNameInp.value,
@@ -115,8 +108,17 @@ function addProduct()
 		company:productCompanyInp.value,
 		desc:productDescInp.value,
 	}
-	productsContainer.push(product);
-	localStorage.setItem("productsContainer",JSON.stringify(productsContainer));
+	if (validateForm(productNameInp) == true) {
+		productsContainer.push(product);
+		localStorage.setItem(
+			"productsContainer",
+			JSON.stringify(productsContainer)
+		);
+	}
+	else{
+		console.log("User not valid")
+	}
+	
 
 }
  
@@ -136,7 +138,7 @@ function clearForm()
 {
 	var inputs = document.getElementsByClassName('form-control');
 	for (var i = 0; i < inputs.length ; i++) {
-		inputs[i].value = " ";
+		inputs[i].value = "";
 	}
 }
 function deleteProduct(product)
