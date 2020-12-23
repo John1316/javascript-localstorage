@@ -5,54 +5,46 @@
 	</head>
 	<body>
         
-        <!-- <div class="container py-4">
-			<input id="searchInp" type="text" class="form-control mb-3" placeholder="Search"/>
-			
-			<div class="row" id="searchRow"></div>
-		</div> -->
+        <!-- Start section of filling data -->
+        <div class="container py-3">
             
-    <div class="container py-3">
-        
-        <div id="alertContainer" class="alert alert-danger"> 
-        </div>
-            
-            <div class="form-group">    
-                <label>Product Name :</label>
-                <input id="productName" class="form-control"/>
-            </div>        
-            <div class="form-group">    
-                <label>Product Price :</label>
-                <input type="number" id="productPrice" class="form-control"/>
-            </div>        
-            <div class="form-group">    
-                <label>Product Company :</label>
-                <input id="productCompany" class="form-control"/>
+            <div id="alertContainer" class="alert alert-danger"> 
             </div>
-                    
-            <div class="form-group">    
-                <label>Product Description :</label>
-                <textarea id="productDesc" class="form-control"></textarea>
-            </div>
-            <button id="addBtn" class="btn float-right btn-info">add product</button>
-        
                 
+                <div class="form-group">    
+                    <label>Product Name :</label>
+                    <input id="productName" class="form-control"/>
+                </div>        
+                <div class="form-group">    
+                    <label>Product Price :</label>
+                    <input type="number" id="productPrice" class="form-control"/>
+                </div>        
+                <div class="form-group">    
+                    <label>Product Company :</label>
+                    <input id="productCompany" class="form-control"/>
+                </div>
+                        
+                <div class="form-group">    
+                    <label>Product Description :</label>
+                    <textarea id="productDesc" class="form-control"></textarea>
+                </div>
+                
+                <button id="addBtn" class="btn float-right btn-info">add product</button>
                 <div class="clearfix"></div>
-        
-
-        
-    </div>
-            
-            
-    <div class="container text-center py-4">
-        <div class="search py-5">
-            <input type="text" class="form-control w-75 m-auto" placeholder="Search ..." onkeyup="searchProducts(this.value)">
         </div>
-        <div class="row" id="rowData">
-        
-        
-        </div>  
-    </div>      
-
+        <!-- End section of filling data -->
+    
+        <!-- Start section of displaying data -->
+        <div class="container text-center py-4">
+            <div class="search py-5">
+                <input type="text" class="form-control w-75 m-auto" placeholder="Search ..." onkeyup="searchProducts(this.value)">
+            </div>
+            <div class="row" id="rowData">
+            
+            
+            </div>  
+        </div>      
+        <!-- End section of displaying data -->
 
             
         <script src="js/home.js"></script>
