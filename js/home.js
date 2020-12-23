@@ -68,19 +68,13 @@ function validateForm()
 {
 	var errors = "";
 	var nameRegex = /^[A-Z][A-Za-z]{2,8}$/;
-	var priceRegex = /^[1-9][0-9]{4}$/;
 	if(nameRegex.test(productNameInp.value) == false)
 		{
 			errors +="<p>productName must start with upperCase</p>";
 			alertContainer.style.display = "block";
 			alertContainer.innerHTML = errors;
 		}
-	if(priceRegex.test(productPriceInp.value) == false)
-		{
-			errors +="<p>price must be between 10-10000</p>";
-			alertContainer.style.display = "block";
-			alertContainer.innerHTML = errors;
-		}
+
 	if(errors.length > 0)
 		{
 			return false;
@@ -132,7 +126,7 @@ function displayData()
 	var cols = " ";
 	for (var i = 0 ; i < productsContainer.length; i++) {
 		
-		cols +='<div class="col-md-3"><img src="images/team-bw-2.jpg" class="img-fluid"><h2>'+productsContainer[i].name+'</h2><p class="text-danger">'+productsContainer[i].price+'</p><h3>'+productsContainer[i].company+'</h3><h3 class="text-info">'+productsContainer[i].desc+'</h3><button class="btn btn-danger" onclick="deleteProduct('+i+')">DELETE</button><button class="btn btn-info ml-2" onclick="setForm('+i+')">update</button></div>';
+		cols +='<div class="col-md-3 mb-4"><img src="images/team-bw-2.jpg" class="img-fluid"><h2>'+productsContainer[i].name+'</h2><p class="text-danger">'+productsContainer[i].price+'</p><h3>'+productsContainer[i].company+'</h3><h3 class="text-info">'+productsContainer[i].desc+'</h3><button class="btn btn-danger" onclick="deleteProduct('+i+')">DELETE</button><button class="btn btn-info ml-2" onclick="setForm('+i+')">update</button></div>';
 		
 	} 
 	document.getElementById('rowData').innerHTML = cols;
@@ -145,9 +139,9 @@ function clearForm()
 		inputs[i].value = " ";
 	}
 }
-function deleteProduct(hamdy)
+function deleteProduct(product)
 {
-	productsContainer.splice(hamdy,1);
+	productsContainer.splice(product,1);
 	localStorage.setItem("productsContainer",JSON.stringify(productsContainer));
 	displayData();
 } 
